@@ -1,7 +1,7 @@
 <?php
 /**
  * Product class file.
- * 
+ *
  * @package child_theme
  */
 /**
@@ -123,6 +123,15 @@ class Product {
 		$is_saved = $this->save_data_to_store();
 
 		return $is_saved;
+	}
+
+	/**
+	 * Get product title.
+	 *
+	 * @return string
+	 */
+	public function get_title() {
+		return $this->data['title'];
 	}
 
 	/**

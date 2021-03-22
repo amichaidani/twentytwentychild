@@ -125,3 +125,25 @@ function get_product_youtube( $product_id = null ) {
 
 	return $output_html;
 }
+
+function get_the_product_main_image( $product_id = null ) {
+
+	$product = get_product_by_id( $product_id );
+
+	if ( ! $product ) {
+		return '';
+	}
+
+	$output_html  = '<div class="product-main-image-wrapper">';
+	$output_html .= '<div class="product-main-image-wrapper-inner">';
+
+	if ( $product && $product->is_on_sale() ) {
+		$output_html .= sprintf( '<div class="badge-sale">%s</div>', __( 'Sale!', 'child_theme' ) );
+	}
+
+	$output_html .= get_the_post_thumbnail($product_id);
+
+	$output_html .= '</div></div>';
+
+	return $output_html;
+}

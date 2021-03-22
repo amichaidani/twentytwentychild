@@ -23,6 +23,9 @@ require_once PRODUCTS_DIR_PATH . '/products-template-tags.php';
 // Template hooks.
 require_once PRODUCTS_DIR_PATH . '/products-template-hooks.php';
 
+// Shortcodes.
+require_once PRODUCTS_DIR_PATH . '/shortcode/shortcode.php';
+
 /**
  * Start the products extension engines!
  * Well, it's a plugin, but let's call it an extension.

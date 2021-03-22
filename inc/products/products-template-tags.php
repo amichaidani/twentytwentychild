@@ -14,23 +14,7 @@ function the_product_main_image() {
 
 	global $post;
 
-	if ( 'product' !== get_post_type() ) {
-		return;
-	}
-
-	echo '<div class="product-main-image-wrapper">';
-		echo '<div class="product-main-image-wrapper-inner">';
-
-	$product = get_product_by_id( $post->ID );
-
-	if ( $product && $product->is_on_sale() ) {
-		printf( '<div class="badge-sale">%s</div>', __( 'Sale!', 'child_theme' ) );
-	}
-
-	the_post_thumbnail();
-
-		echo '</div>';
-	echo '</div>';
+	echo wp_kses_post( get_the_product_main_image( $post->ID ) );
 }
 
 /**
