@@ -46,15 +46,15 @@ class Product {
 
 		$this->id = $product_id;
 
-		$this->get_data();
+		$this->init_data();
 
 		return true;
 	}
 
-	/**
-	 * Get data of product for this instance.
-	 */
-	public function get_data() {
+		/**
+		 * Get data of product for this instance.
+		 */
+	private function init_data() {
 
 		$fields = array();
 
@@ -94,6 +94,31 @@ class Product {
 		} else {
 			return $data_from_store;
 		}
+	}
+
+	/**
+	 * Save data to store.
+	 *
+	 * @return boolean true if updated, false if not.
+	 */
+	private function save_data_to_store() {
+
+		$data_store = new Product_Data_Store( $this->id );
+
+		if ( ! $data_store ) {
+			return false;
+		}
+
+		return $data_store->save_data( $this->data );
+	}
+
+	/**
+	 * Get all product data.
+	 *
+	 * @return array
+	 */
+	public function get_all_data() {
+		return $this->data;
 	}
 
 	/**
@@ -185,21 +210,5 @@ class Product {
 	 */
 	public function get_categories() {
 		return $this->data['categories'];
-	}
-
-	/**
-	 * Save data to store.
-	 *
-	 * @return boolean true if updated, false if not.
-	 */
-	private function save_data_to_store() {
-
-		$data_store = new Product_Data_Store( $this->id );
-
-		if ( ! $data_store ) {
-			return false;
-		}
-
-		return $data_store->save_data( $this->data );
 	}
 }

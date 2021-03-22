@@ -12,6 +12,7 @@ require_once PRODUCTS_DIR_PATH . '/class/class-product-cpt.php';
 require_once PRODUCTS_DIR_PATH . '/class/class-product.php';
 require_once PRODUCTS_DIR_PATH . '/class/class-product-data-store.php';
 require_once PRODUCTS_DIR_PATH . '/class/class-product-events.php';
+require_once PRODUCTS_DIR_PATH . '/class/class-product-json-api.php';
 require_once PRODUCTS_DIR_PATH . '/dummy-data.php';
 
 // Functions.
@@ -33,6 +34,7 @@ require_once PRODUCTS_DIR_PATH . '/shortcode/shortcode.php';
 function products_extension_init() {
 	new Product_CPT();
 	new Product_Events();
+	new Product_Json_Api();
 }
 
 products_extension_init();

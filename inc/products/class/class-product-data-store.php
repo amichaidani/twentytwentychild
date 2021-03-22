@@ -123,7 +123,8 @@ class Product_Data_Store {
 					$data[ $field ] = get_the_content( $_product_id );
 					break;
 				case 'image':
-					$data[ $field ] = get_post_thumbnail_id();
+					$data[ $field ] = get_post_thumbnail_id( $_product_id );
+					error_log( $data[ $field ] );
 					break;
 				case 'categories':
 					$terms = get_the_terms( $_product_id, 'product_cat' );
