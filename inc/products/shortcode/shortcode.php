@@ -32,11 +32,12 @@ function get_product_box( $atts = array() ) {
 		$style_string = 'style="background-color:' . esc_attr( $bg_color ) . '"';
 	}
 
-	echo '<div class="product-box-custom" ' . $style_string . '>';
-	echo get_the_product_main_image( $product_id );
-	echo '<h2>' . esc_html( $product->get_title() ) . '</h2>';
-	echo wp_kses_post( get_product_price_html( $product_id ) );
-	echo '</div>';
-}
+	$output_html  = '<div class="product-box-custom" ' . $style_string . '>';
+	$output_html .= get_the_product_main_image( $product_id );
+	$output_html .= '<h2>' . esc_html( $product->get_title() ) . '</h2>';
+	$output_html .= get_product_price_html( $product_id );
+	$output_html .= '</div>';
 
+	echo wp_kses_post( apply_filters( 'product_box_shortcode_output', $output_html ) );
+}
 add_shortcode( 'product-box', 'get_product_box' );

@@ -18,8 +18,9 @@ class Child_Theme {
 		add_action( 'after_switch_theme', array( $this, 'register_wp_test_user' ) );
 		add_filter( 'wp_kses_allowed_html', array( $this, 'allow_iframe_for_wp_kses_post' ), 10, 2 );
 		add_filter( 'get_the_archive_title', array( $this, 'remove_archive_title_prefix' ), 10, 1 );
+		add_action( 'wp_head', array( $this, 'add_custom_address_bar_color' ) );
 	}
-	
+
 	/**
 	 * Enqeueu parent theme & child theme styles.
 	 */
@@ -102,6 +103,14 @@ class Child_Theme {
 	public function remove_archive_title_prefix( $title ) {
 		$title = post_type_archive_title( '', false );
 		return $title;
+	}
+
+	/**
+	 * Add custom address bar color to <head>.
+	 */
+
+	function add_custom_address_bar_color() {
+		echo '<meta name="theme-color" content="#cd2653" />';
 	}
 }
 
