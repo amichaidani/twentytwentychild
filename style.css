@@ -5,8 +5,165 @@
  Author:       Amichai Dani	
  Author URI:   https://www.linkedin.com/in/amichaidani/
  Template:     twentytwenty
- Version:      1.0.0
+ Version:      1.0.1
  License:      GNU General Public License v2 or later
  License URI:  http://www.gnu.org/licenses/gpl-2.0.html
  Text Domain:  twentytwentyhild
 */
+
+/* Global */
+.product-main-image-wrapper {
+    max-width: 600px;
+    text-align: center;
+}
+
+.product-main-image-wrapper .product-main-image-wrapper-inner {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+
+.product-main-image-wrapper .product-main-image-wrapper-inner img {
+    object-fit: cover;
+    width: 100%;
+}
+
+.product-main-image-wrapper .product-main-image-wrapper-inner .badge-sale {
+    display: flex;
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    align-items: center;
+    justify-content: center;
+    background-color: #cd2653;
+    padding: 0.8em;
+    min-height: 1.5em;
+    color: #ffffff;
+    font-weight: bolder;
+}
+
+.product-price-wrapper {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.product-price-wrapper del {
+    margin-right: 0.2em;
+    color: gray;
+    font-size: 80%;
+    font-weight: normal;
+}
+
+ul.product-categories-list {
+    margin: 0 0 10px 0;
+    list-style: none;
+}
+
+ul.product-categories-list li.product-category-name {
+    display: inline-block;
+    margin: 0 0.5em 0.5em 0;
+    background: #f4f4f4;
+    padding: 0.8em;
+}
+
+
+/* Product archive */
+.product-archive-title {
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+.products-list-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15px;
+    margin-bottom: 40px;
+}
+
+
+.loop-product-title-link:link {
+    text-decoration: none;
+}
+
+.loop-product-title-link h2 {
+    margin-top: 12px;
+    color: #000000;
+    font-size: 24px;
+}
+
+/* Single product */
+.single-product .product-entry {
+    display: flex;
+    padding: 60px 0;
+    flex-direction: column;
+}
+
+.single-product .product-entry .product-title {
+    font-size: 36px;
+}
+
+.single-product .product-entry .product-categories-list {
+    margin-top: 10px;
+}
+
+.single-product-gallery {
+    display: flex;
+    max-width: 600px;
+    overflow-x: auto;
+}
+
+.single-product-gallery img {
+    flex-grow: 0;
+    max-width: 33.333%;
+    object-fit: cover;
+}
+
+.single-product .post-inner {
+    padding-top: 0;
+}
+
+.single-product .product-content {
+    margin-bottom: 20px;
+}
+
+.single-product .product-content .product-youtube-wrapper {
+    margin-bottom: 40px;
+}
+
+.single-product .related-products {
+    padding-top: 20px;
+}
+
+.single-product .related-products h2 {
+    text-align: center;
+    margin-bottom: 1.2em;
+}
+
+@media screen and (min-width: 768px) {
+
+    .products-list-wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20px;
+    }
+
+    .single-product .product-entry {
+        flex-direction: row;
+        padding: 60px 0 20px 0;
+    }
+
+    .single-product .product-entry .entry-summary {
+        margin-left: 4em;
+    }
+
+
+    .single-product .post-inner {
+        padding-top: 40px;
+    }
+
+    .single-product .product-content {
+        margin-bottom: 80px;
+    }
+
+
+}

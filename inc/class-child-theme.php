@@ -2,7 +2,7 @@
 /**
  * Twenty Twenty Child theme functions.
  *
- * @package twentytwentychild
+ * @package child_theme
  */
 
 /**
@@ -14,16 +14,14 @@ class Child_Theme {
 	 * Constructor.
 	 */
 	public function __construct() {
-		// Enqueue parent & child themes styles.
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
-		// Register new user after theme setup.
-		add_action( 'after_setup_theme', array( $this, 'register_wp_test_user' ) );
+		add_action( 'after_switch_theme', array( $this, 'register_wp_test_user' ) );
+		add_filter( 'wp_kses_allowed_html', array( $this, 'allow_iframe_for_wp_kses_post' ), 10, 2 );
+		add_filter( 'get_the_archive_title', array( $this, 'remove_archive_title_prefix' ), 10, 1 );
 	}
-
+	
 	/**
 	 * Enqeueu parent theme & child theme styles.
-	 *
-	 * @since 1.0.0
 	 */
 	public function enqueue_styles() {
 
@@ -33,13 +31,13 @@ class Child_Theme {
 		// TODO: Check if should check for deps of parent.
 		wp_enqueue_style(
 			$parenthandle,
-			PARENT_THEME_PATH . '/style.css',
+			PARENT_THEME_URI . '/style.css',
 			array(),
 			$theme->parent()->get( 'Version' )
 		);
 		wp_enqueue_style(
 			CHILD_THEME_NAME . '-style',
-			CHILD_THEME_PATH,
+			CHILD_THEME_URI . '/style.css',
 			array( $parenthandle ),
 			$theme->get( 'Version' )
 		);
@@ -47,8 +45,6 @@ class Child_Theme {
 
 	/**
 	 * Register new editor role user: 'wp-test', and disable admin bar for this user.
-	 *
-	 * @since 1.0.0
 	 */
 	public function register_wp_test_user() {
 
@@ -75,5 +71,40 @@ class Child_Theme {
 
 	}
 
+	/**
+	 * Allow wp_kses_post to output Iframes.
+	 *
+	 * @param array  $tags allowed tags.
+	 * @param string $context the context.
+	 * @return array the allowed tags modified.
+	 */
+	public function allow_iframe_for_wp_kses_post( $tags, $context ) {
+
+		if ( 'post' === $context ) {
+			$tags['iframe'] = array(
+				'src'             => true,
+				'height'          => true,
+				'width'           => true,
+				'frameborder'     => true,
+				'allowfullscreen' => true,
+			);
+		}
+
+		return $tags;
+	}
+
+	/**
+	 * Remove prefix 'archives' from posts archives.
+	 *
+	 * @param string $title the original title.
+	 * @return string the new foramatted title.
+	 */
+	public function remove_archive_title_prefix( $title ) {
+		$title = post_type_archive_title( '', false );
+		return $title;
+	}
 }
+
+
+
 
